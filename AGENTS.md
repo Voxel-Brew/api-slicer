@@ -1,32 +1,53 @@
-# Slicer API instructions
+# Repository Guidelines
 
-- Own public slicer backend, catalog, execution and runtime-provider contracts.
-- Keep printer profile catalogs and runtime access here; physical-device
-  connections belong to api/printer.
-- Depend only on api/model and api/export; never on AGPL application modules.
-- Keep native handles, Protobuf, JavaFX, CLI parsing and DI annotations out of contracts.
-- Keep concrete backends, discovery, process execution and file publication in VoxelBrew/slicer.
-- Publish the MIT `dev.voxelbrew.api:slicer` artifact with source JAR and license. Verify independent consumer compilation.
-- Document package and service-registration migrations in README.md and the application repository docs/file-io.md.
+## Project Structure & Module Organization
 
-## Standalone repository
+This repository publishes the headless `dev.voxelbrew.api:slicer` Java API. Public contracts live
+under `src/main/java/dev/voxelbrew/slicer/api`; version metadata is in `src/main/resources`.
+Gradle build logic is split between `build.gradle.kts` and `gradle/*.gradle.kts`, while quality
+configuration lives in `config/quality`. Release automation is under `.github/scripts` and
+`.github/workflows`.
 
-- Use Java 21 and the committed Gradle wrapper. Preserve the MIT license and public Java packages.
-- Run `./gradlew spotlessApply` (Windows: `.\gradlew.bat spotlessApply`) before every commit, then review changes.
-- Run `check` and validate Maven POM dependencies when changing publication configuration.
-- Never add application-module dependencies or commit generated output or credentials.
+Keep this module limited to slicer contracts, catalogs, and runtime access. Concrete backends,
+process execution, file publication, UI, CLI parsing, and dependency-injection code belong in the
+application repositories. Production dependencies must remain limited to the BOM plus the model
+and export APIs.
 
-## Development and verification
+## Build, Test, and Development Commands
 
-- Read `README.md` and the build before changing contracts or publication.
-- Unit tests live in `src/test/test`; `integrationTest` covers service integration.
-  `check` also runs formatting, dependency checks, SpotBugs and release-script
-  tests; it does not automatically run the separate `e2eTest` task.
-- API versions are independent of the application. Preserve version properties;
-  local workspace composite builds substitute sibling API sources. Standalone
-  consumers opt into Maven local with `-PuseMavenLocal=true` after publishing
-  required dependencies.
-- Instruction-only edits need Spotless and diff review. In a dirty checkout,
-  scope formatting with `-PspotlessIdeHook=<comma-separated absolute paths>`.
-- Remote publication is separate from validation; do not publish or change release
-  versions merely to test a change.
+- `./gradlew check` runs formatting checks, compilation, unit and integration tests, SpotBugs,
+  dependency-boundary verification, and release-script tests.
+- `./gradlew test` runs the JUnit 5 unit suite only.
+- `./gradlew integrationTest` runs service integration tests; `./gradlew e2eTest` runs the separate
+  end-to-end suite, which is not included in `check`.
+- `./gradlew spotlessApply` formats Java, Kotlin Gradle scripts, Markdown, YAML, and properties.
+- `./gradlew publishToMavenLocal` publishes a local snapshot for consumer testing. Use
+  `-PuseMavenLocal=true` in consumers when required.
+
+Java 21 and the committed Gradle wrapper are required. On Windows, use `gradlew.bat`.
+
+## Coding Style & Naming Conventions
+
+Spotless applies Palantir Java Format and ktfmt; do not hand-align code against those formatters.
+Use UTF-8, four-space Java indentation, `PascalCase` for types, `camelCase` for methods and fields,
+and `UPPER_SNAKE_CASE` for constants. Keep packages beneath `dev.voxelbrew.slicer.api`. Compilation
+uses `-Xlint:all -Werror`, so new warnings must be resolved.
+
+## Testing Guidelines
+
+Place unit tests in `src/test/test/java`, integration tests in `src/test/integrationTest/java`, and
+end-to-end tests in `src/test/e2eTest/java`; mirror these paths for resources. Name JUnit classes
+`*Test` and cover contract validation, immutable-value behavior, and SPI compatibility. Run
+`./gradlew check e2eTest` before submitting changes that affect runtime behavior.
+
+## Commit & Pull Request Guidelines
+
+History favors concise, imperative subjects, sometimes scoped with prefixes such as `docs:`,
+`build:`, or `ci:`; milestone work may use `M4:`. Keep each commit focused. Pull requests should
+explain the contract impact, identify linked issues, note compatibility or migration concerns, and
+list verification commands. Include screenshots only for documentation rendering changes.
+
+## Security & Publication
+
+Never commit credentials, signing keys, generated artifacts, or local Gradle properties. Remote
+publication is a release operation, not a validation step; test publication changes locally first.
