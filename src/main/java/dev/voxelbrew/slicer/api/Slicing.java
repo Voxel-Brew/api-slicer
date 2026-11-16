@@ -1,8 +1,8 @@
 package dev.voxelbrew.slicer.api;
 
+import dev.voxelbrew.api.exporter.ExporterProviderRegistry;
 import dev.voxelbrew.engine.model.CadDocument;
 import dev.voxelbrew.engine.printing.*;
-import dev.voxelbrew.exporter.api.ExporterCatalog;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Consumer;
@@ -42,7 +42,8 @@ public interface Slicing {
             SlicerBackend backend,
             CadDocument document,
             ManufacturingModel model,
-            ExporterCatalog exporters,
+            ExporterProviderRegistry exporters,
+            Path pluginDirectory,
             Path executable,
             Path destination,
             boolean overwrite,

@@ -10,9 +10,11 @@ source JAR and `META-INF/LICENSE`. It owns the headless contracts in
 - `SlicerRuntime`: runtime service factory used by CLI/GUI composition roots.
 
 The module depends on `dev.voxelbrew.api:model` for CAD/manufacturing values and `dev.voxelbrew.api:export`
-for the exporter catalog used to prepare slicer input. It has no dependency on
+for the exporter registry used to prepare slicer input. It has no dependency on
 engine, concrete file I/O, JavaFX, picocli or Dagger. Process execution, built-in
 backends, discovery and atomic job publication remain in the `impl/slicer` runtime.
+Pass the plugin directory separately to `Slicing.slice(...)` when preparing input
+with plugin exporters.
 
 ## External backends
 
@@ -35,7 +37,7 @@ This fixture does not qualify a real slicer; real slicing tests use PrusaSlicer.
 ## Migration
 
 Replace `dev.voxelbrew.exporter.printing.SlicerBackend` and
-`dev.voxelbrew.exporter.api.SlicerCatalog` / `Slicing` imports with
+`dev.voxelbrew.exporter.printing.SlicerCatalog` / `Slicing` imports with
 `dev.voxelbrew.slicer.api` imports. Update the service-resource filename and
 recompile providers. The SPI version remains 2 because its methods and semantics
 are unchanged. `ExportRuntime` no longer provides slicing services; use
