@@ -1,7 +1,7 @@
-package dev.voxelbrew.slicer.api;
+package dev.voxelbrew.api.slicer;
 
-import dev.voxelbrew.engine.printing.Cancellation;
-import dev.voxelbrew.engine.printing.ManufacturingModel;
+import dev.voxelbrew.api.model.printing.Cancellation;
+import dev.voxelbrew.api.model.printing.ManufacturingModel;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
@@ -53,7 +53,7 @@ public interface SlicerBackend {
             Cancellation cancellation,
             Consumer<String> diagnostics) {}
 
-    record RunResult(Map<String, String> resolvedSettings, dev.voxelbrew.engine.printing.PrintArtifact artifact) {
+    record RunResult(Map<String, String> resolvedSettings, dev.voxelbrew.api.model.printing.PrintArtifact artifact) {
         public RunResult(Map<String, String> resolvedSettings) {
             this(resolvedSettings, null);
         }

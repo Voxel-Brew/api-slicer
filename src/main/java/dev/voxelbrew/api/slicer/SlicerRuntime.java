@@ -1,4 +1,4 @@
-package dev.voxelbrew.slicer.api;
+package dev.voxelbrew.api.slicer;
 
 import java.nio.file.Path;
 

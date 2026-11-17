@@ -3,7 +3,7 @@
 ## Project Structure & Module Organization
 
 This repository publishes the headless `dev.voxelbrew.api:slicer` Java API. Public contracts live
-under `src/main/java/dev/voxelbrew/slicer/api`; version metadata is in `src/main/resources`.
+under `src/main/java/dev/voxelbrew/api/slicer`; version metadata is in `src/main/resources`.
 Gradle build logic is split between `build.gradle.kts` and `gradle/*.gradle.kts`, while quality
 configuration lives in `config/quality`. Release automation is under `.github/scripts` and
 `.github/workflows`.
@@ -30,7 +30,7 @@ Java 21 and the committed Gradle wrapper are required. On Windows, use `gradlew.
 
 Spotless applies Palantir Java Format and ktfmt; do not hand-align code against those formatters.
 Use UTF-8, four-space Java indentation, `PascalCase` for types, `camelCase` for methods and fields,
-and `UPPER_SNAKE_CASE` for constants. Keep packages beneath `dev.voxelbrew.slicer.api`. Compilation
+and `UPPER_SNAKE_CASE` for constants. Keep packages beneath `dev.voxelbrew.api.slicer`. Compilation
 uses `-Xlint:all -Werror`, so new warnings must be resolved.
 
 ## Testing Guidelines

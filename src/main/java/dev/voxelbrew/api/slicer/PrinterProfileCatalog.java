@@ -1,6 +1,6 @@
-package dev.voxelbrew.slicer.api;
+package dev.voxelbrew.api.slicer;
 
-import dev.voxelbrew.engine.printing.PrinterProfile;
+import dev.voxelbrew.api.model.printing.PrinterProfile;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;

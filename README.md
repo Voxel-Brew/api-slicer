@@ -2,7 +2,7 @@
 
 `dev.voxelbrew.api:slicer` publishes the MIT `dev.voxelbrew.api:slicer` artifact, including a
 source JAR and `META-INF/LICENSE`. It owns the headless contracts in
-`dev.voxelbrew.slicer.api`:
+`dev.voxelbrew.api.slicer`:
 
 - `SlicerBackend`: version-2 backend SPI, input format, capabilities, probing and execution requests.
 - `SlicerCatalog`: scoped discovery results and catalog factory.
@@ -21,7 +21,7 @@ Compile against `dev.voxelbrew.api:slicer:<version>` with `compileOnly` (Maven
 `SlicerBackend` with a public no-argument constructor and register its class in:
 
 ```text
-META-INF/services/dev.voxelbrew.slicer.api.SlicerBackend
+META-INF/services/dev.voxelbrew.api.slicer.SlicerBackend
 ```
 
 Copy the JAR into the trusted plugin directory. `SlicerBackend.inputFormat()`
@@ -36,7 +36,7 @@ This fixture does not qualify a real slicer; real slicing tests use PrusaSlicer.
 
 Replace `dev.voxelbrew.exporter.printing.SlicerBackend` and
 `dev.voxelbrew.exporter.api.SlicerCatalog` / `Slicing` imports with
-`dev.voxelbrew.slicer.api` imports. Update the service-resource filename and
+`dev.voxelbrew.api.slicer` imports. Update the service-resource filename and
 recompile providers. The SPI version remains 2 because its methods and semantics
 are unchanged. `ExportRuntime` no longer provides slicing services; use
 `SlicerRuntime` at the composition root and inject the individual services.
@@ -54,7 +54,7 @@ See [independent slicer configuration](https://github.com/Voxel-Brew/VoxelBrew/b
 
 Java 21 and the committed Gradle wrapper are required. Run `./gradlew check`
 (`.\gradlew.bat check` on Windows). This MIT library publishes as
-`dev.voxelbrew.api:slicer:0.1.0-SNAPSHOT`; Java package names remain unchanged.
+`dev.voxelbrew.api:slicer:0.1.0-SNAPSHOT`.
 Use `./gradlew publishToMavenLocal` for local publication. Consumers opt in with
 `-PuseMavenLocal=true`. `publishApiPublicationToGitHubPackagesRepository` publishes remotely.
 
@@ -148,3 +148,11 @@ The BOM is metadata only and adds no application libraries.
 For local development, publish `../../BOM` to Maven local first and pass
 `-PuseMavenLocal=true`, or use the parent workspace composite.
 Standalone builds require the selected BOM to be published before use.
+
+## Package migration
+
+Public contracts now live under `dev.voxelbrew.api.slicer`.
+This is a source and binary incompatible package rename. Update imports and service
+registration filenames, then recompile consumers and plugin providers against the
+matching model, import, export, printer, and slicer API snapshots. Maven coordinates
+and release versions are unchanged; deploy the matching application and APIs together.
