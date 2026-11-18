@@ -10,9 +10,12 @@ source JAR and `META-INF/LICENSE`. It owns the headless contracts in
 - `SlicerRuntime`: runtime service factory used by CLI/GUI composition roots.
 
 The module depends on `dev.voxelbrew.api:model` for CAD/manufacturing values and `dev.voxelbrew.api:export`
-for the exporter catalog used to prepare slicer input. It has no dependency on
+for the exporter catalog used to prepare slicer input, and `dev.voxelbrew.api:printer` for hardware profiles and catalog contracts. It has no dependency on
 engine, concrete file I/O, JavaFX, picocli or Dagger. Process execution, built-in
 backends, discovery and atomic job publication remain in the `impl/slicer` runtime.
+
+Hosts obtain profile catalogs through `printer-api` and bind their implementation directly.
+`SlicerRuntime` supplies slicer services only; it does not construct or forward printer catalogs.
 
 ## External backends
 
@@ -94,7 +97,7 @@ available without signing credentials.
 Publish a release BOM to Maven Central before releasing APIs that import it.
 The BOM contains constraints only, so it can precede its managed artifacts.
 For the first API release, publish **model**, then **export/import/printer**, then
-**slicer**. Slicer depends on model and export. Allow Central's public repository
+**slicer**. Slicer depends on model, export, and printer. Allow Central's public repository
 to propagate each dependency before releasing its consumers. API versions remain
 independent of application versions.
 

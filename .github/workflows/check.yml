@@ -31,6 +31,11 @@ jobs:
           repository: Voxel-Brew/api-export
           ref: master
           path: dependencies/export
+      - uses: actions/checkout@v4
+        with:
+          repository: Voxel-Brew/api-printer
+          ref: master
+          path: dependencies/printer
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -39,7 +44,7 @@ jobs:
         with:
           node-version: "24"
       - uses: gradle/actions/setup-gradle@v4
-      - run: ./gradlew check --include-build ../dependencies/bom --include-build ../dependencies/model --include-build ../dependencies/export
+      - run: ./gradlew check --include-build ../dependencies/bom --include-build ../dependencies/model --include-build ../dependencies/export --include-build ../dependencies/printer
         working-directory: api
   publish:
     needs: verify

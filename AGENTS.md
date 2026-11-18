@@ -10,8 +10,8 @@ configuration lives in `config/quality`. Release automation is under `.github/sc
 
 Keep this module limited to slicer contracts, catalogs, and runtime access. Concrete backends,
 process execution, file publication, UI, CLI parsing, and dependency-injection code belong in the
-application repositories. Production dependencies must remain limited to the BOM plus the model
-and export APIs.
+application repositories. Production dependencies must remain limited to the BOM plus the model,
+export, and printer APIs.
 
 ## Build, Test, and Development Commands
 
