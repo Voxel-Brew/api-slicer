@@ -4,8 +4,8 @@
 
 This repository publishes the headless `dev.voxelbrew.api:slicer` Java API. Public contracts live
 under `src/main/java/dev/voxelbrew/api/slicer`; version metadata is in `src/main/resources`.
-Gradle build logic is split between `build.gradle.kts` and `gradle/*.gradle.kts`, while quality
-configuration lives in `config/quality`. Release automation is under `.github/scripts` and
+Gradle build logic is split between `build.gradle.kts` and `gradle/*.gradle.kts`, while SpotBugs
+configuration comes from the BOM checkout. Release automation is under `.github/scripts` and
 `.github/workflows`.
 
 Keep this module limited to slicer provider and operation contracts. Concrete backends,
@@ -38,6 +38,15 @@ Place unit tests in `src/test/test/java`, integration tests in `src/test/integra
 end-to-end tests in `src/test/e2eTest/java`; mirror these paths for resources. Name JUnit classes
 `*Test` and cover contract validation, immutable-value behavior, and SPI compatibility. Run
 `./gradlew check e2eTest` before submitting changes that affect runtime behavior.
+
+## Pre-commit SpotBugs
+
+For a standalone checkout, set `VOXELBREW_BOM_DIR` to a VoxelBrew BOM checkout that
+contains `spotbugs-conventions`. The composite workspace and CI supply it automatically.
+
+Before committing, run `./gradlew spotbugsMain` from this API repository or
+`./gradlew :slicer:spotbugsMain` from the composite workspace.
+Use `.\gradlew.bat` in place of `./gradlew` on Windows.
 
 ## Commit & Pull Request Guidelines
 
