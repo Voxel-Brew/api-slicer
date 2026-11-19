@@ -13,3 +13,9 @@ The provider and operation contracts replace the previous slicer SPI. Update the
 ## Development
 
 Run `./gradlew check` with Java 21, or `gradlew.bat check` on Windows. The parent workspace composite substitutes local BOM and model API sources. For a standalone build against Maven Local, publish the matching BOM and model API locally and pass `-PuseMavenLocal=true`. The checked-in release workflows manage snapshot and Maven Central publication.
+
+## SpotBugs
+
+For a standalone checkout, set `VOXELBREW_BOM_DIR` to a VoxelBrew BOM checkout that
+contains `spotbugs-conventions`. The workspace and CI supply the convention automatically.
+Run `./gradlew spotbugsMain` directly or as part of `./gradlew check`.
