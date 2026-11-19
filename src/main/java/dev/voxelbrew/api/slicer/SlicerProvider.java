@@ -1,6 +1,8 @@
 package dev.voxelbrew.api.slicer;
 
 import dev.voxelbrew.api.model.printing.Cancellation;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 
 /** Lightweight service provider for a slicer operation. */
@@ -17,6 +19,19 @@ public interface SlicerProvider {
      */
     default Optional<SlicerDialog<?>> settingsDialog() {
         return Optional.empty();
+    }
+
+    /**
+     * Finds local executable candidates on explicit request during configuration. Hosts may fill the
+     * settings dialog's {@code executable} input with a selected path. Discovery must not launch the
+     * candidates. Hosts can use {@link #checkConfiguration} to check the selected installation.
+     *
+     * @param cancellation cancels an in-progress search
+     * @return absolute paths to candidate executables, or an empty list if none are found or supported
+     * @throws Exception if discovery fails
+     */
+    default List<Path> discoverExecutables(Cancellation cancellation) throws Exception {
+        return List.of();
     }
 
     /**

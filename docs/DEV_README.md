@@ -2,6 +2,14 @@
 
 Compile with Java 21 against `dev.voxelbrew.api:slicer` and its model API. Use compile-only dependencies and ship your implementation and any private libraries in the plugin JAR. Register the public, no-argument provider class by putting its fully qualified name in `META-INF/services/dev.voxelbrew.api.slicer.SlicerProvider`.
 
+## Local executable discovery
+
+Override `discoverExecutables(Cancellation)` if your provider can find local backend binaries.
+Search locations relevant to your backend, check cancellation during the search, and return absolute
+paths without launching any candidate. Use the `executable` input ID in your settings dialog so
+the host can fill the field with the selected path. The host can then call `checkConfiguration`
+with the chosen path and the other settings to verify that the installation works.
+
 ## Example provider
 
 The standalone example returns a small fixture toolpath to demonstrate the host workflow. A production provider converts and slices the evaluated geometry and derives the actual backend version from the executable or service response.

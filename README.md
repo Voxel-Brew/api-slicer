@@ -6,6 +6,8 @@ A `SlicerProvider` exposes a stable `SlicerDescriptor` and creates a fresh `Slic
 
 Register providers in `META-INF/services/dev.voxelbrew.api.slicer.SlicerProvider`. The application supplies the `SlicerProviderRegistry` through Java's `ServiceLoader`. See the [provider example and lifecycle guide](docs/DEV_README.md).
 
+Providers may implement `discoverExecutables(Cancellation)` to list local backend candidates on request. The default returns an empty list. Discovery and the operational installation check are separate operations.
+
 ## Breaking migration
 
 The provider and operation contracts replace the previous slicer SPI. Update the provider implementation and service resource, then recompile plugins against the matching API. Application consumers must migrate with the API.
