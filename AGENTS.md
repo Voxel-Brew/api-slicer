@@ -41,6 +41,9 @@ end-to-end tests in `src/test/e2eTest/java`; mirror these paths for resources. N
 
 ## Pre-commit SpotBugs
 
+For a standalone checkout, set `VOXELBREW_BOM_DIR` to a VoxelBrew BOM checkout that
+contains `spotbugs-conventions`. The composite workspace and CI supply it automatically.
+
 Before committing, run `./gradlew spotbugsMain` from this API repository or
 `./gradlew :slicer:spotbugsMain` from the composite workspace.
 Use `.\gradlew.bat` in place of `./gradlew` on Windows.
