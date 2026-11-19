@@ -19,7 +19,7 @@ repositories {
                     .orNull
         }
     }
-    for (apiName in listOf("model", "import", "export", "printer", "slicer")) {
+    for (apiName in listOf("model", "slicer")) {
         maven {
             name = "github" + apiName.replaceFirstChar { it.uppercase() }
             url = uri("https://maven.pkg.github.com/voxel-brew/api-$apiName")

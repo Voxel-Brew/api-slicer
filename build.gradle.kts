@@ -119,8 +119,7 @@ val verifyApiDependencies by
                     check(
                         (group != "dev.voxelbrew" || it.moduleVersion?.name == "bom") &&
                             (group != "dev.voxelbrew.api" ||
-                                it.moduleVersion?.name in
-                                    setOf("model", "export", "printer", "slicer"))
+                                it.moduleVersion?.name in setOf("model", "slicer"))
                     ) {
                         "API must not depend on application modules: ${it.id}"
                     }
@@ -187,11 +186,7 @@ publishing {
     }
 }
 
-dependencies {
-    api("dev.voxelbrew.api:model")
-    api("dev.voxelbrew.api:export")
-    api("dev.voxelbrew.api:printer")
-}
+dependencies { api("dev.voxelbrew.api:model") }
 
 // Opt-in signing keeps GitHub snapshots and local development credential-free.
 val centralRelease = providers.gradleProperty("centralRelease").orNull == "true"

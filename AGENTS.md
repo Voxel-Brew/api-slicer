@@ -8,10 +8,9 @@ Gradle build logic is split between `build.gradle.kts` and `gradle/*.gradle.kts`
 configuration lives in `config/quality`. Release automation is under `.github/scripts` and
 `.github/workflows`.
 
-Keep this module limited to slicer contracts, catalogs, and runtime access. Concrete backends,
+Keep this module limited to slicer provider and operation contracts. Concrete backends,
 process execution, file publication, UI, CLI parsing, and dependency-injection code belong in the
-application repositories. Production dependencies must remain limited to the BOM plus the model,
-export, and printer APIs.
+application repositories. Production dependencies must remain limited to the BOM and model API.
 
 ## Build, Test, and Development Commands
 
