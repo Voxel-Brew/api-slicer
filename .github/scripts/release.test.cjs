@@ -23,7 +23,7 @@ test('prepare and candidate preserve immutable refs and allow upload retries', (
     fs.writeFileSync(path.join(work, 'gradle.properties'), 'projectVersion=0.1.0-SNAPSHOT\nbomVersion=0.1.0-SNAPSHOT\n');
     git('add','.'); git('commit','-m','Initial'); git('remote','add','origin',remote); git('push','origin','master');
     const base = git('rev-parse','HEAD');
-    const common = {GITHUB_REPOSITORY:'Voxel-Brew/api-export'};
+    const common = {GITHUB_REPOSITORY:'Voxel-Brew/api-slicer'};
     run(process.execPath, [script,'prepare'], work, {...common,GITHUB_REF_NAME:'master',GITHUB_SHA:base});
     assert.match(git('show','HEAD:gradle.properties'), /projectVersion=0.2.0-SNAPSHOT/);
     git('fetch','origin','release/0.1.x');
