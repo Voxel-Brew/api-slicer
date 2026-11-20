@@ -7,10 +7,6 @@ public abstract sealed class SlicerException extends Exception {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private SlicerException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
     /** The evaluated plate, printer target, or requested capabilities cannot be sliced by this provider. */
     public static final class UnsupportedInput extends SlicerException {
         @Serial
@@ -89,5 +85,9 @@ public abstract sealed class SlicerException extends Exception {
         public InvalidArtifact(String message, Throwable cause) {
             super(message, cause);
         }
+    }
+
+    private SlicerException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

@@ -32,6 +32,11 @@ Use UTF-8, four-space Java indentation, `PascalCase` for types, `camelCase` for 
 and `UPPER_SNAKE_CASE` for constants. Keep packages beneath `dev.voxelbrew.api.slicer`. Compilation
 uses `-Xlint:all -Werror`, so new warnings must be resolved.
 
+Run `./gradlew checkJavaMemberOrder` to check Java source declaration order. The `check` and
+`build` tasks include it. Within each class, start with static final fields, then other static fields,
+final instance fields, other instance fields, static nested types, inner classes, static methods,
+constructors, and instance methods. Preserve Java initialization order when moving fields.
+
 ## Testing Guidelines
 
 Place unit tests in `src/test/test/java`, integration tests in `src/test/integrationTest/java`, and
