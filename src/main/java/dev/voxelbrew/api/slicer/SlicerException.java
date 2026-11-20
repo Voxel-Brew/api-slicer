@@ -33,7 +33,12 @@ public abstract sealed class SlicerException extends Exception {
          * @param message describes what must change in the backend configuration
          */
         public Configuration(String message) {
-            super(message, null);
+            this(message, null);
+        }
+
+        /** Describes a configuration failure and retains the parser or backend exception. */
+        public Configuration(String message, Throwable cause) {
+            super(message, cause);
         }
     }
 
