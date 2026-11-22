@@ -5,7 +5,7 @@
 This repository publishes the headless `dev.voxelbrew.api:slicer` Java API. Public contracts live
 under `src/main/java/dev/voxelbrew/api/slicer`; version metadata is in `src/main/resources`.
 Gradle build logic is split between `build.gradle.kts` and `gradle/*.gradle.kts`, while SpotBugs
-configuration comes from the BOM checkout. Release automation is under `.github/scripts` and
+configuration comes from the public BOM master branch. Release automation is under `.github/scripts` and
 `.github/workflows`.
 
 Keep this module limited to slicer provider and operation contracts. Concrete backends,
@@ -46,8 +46,8 @@ end-to-end tests in `src/test/e2eTest/java`; mirror these paths for resources. N
 
 ## Pre-commit SpotBugs
 
-For a standalone checkout, set `VOXELBREW_BOM_DIR` to a VoxelBrew BOM checkout that
-contains `spotbugs-conventions`. The composite workspace and CI supply it automatically.
+The build resolves VoxelBrew artifacts through Maven and fetches shared quality policy
+from the public BOM master branch.
 
 Before committing, run `./gradlew spotbugsMain` from this API repository or
 `./gradlew :slicer:spotbugsMain` from the composite workspace.
