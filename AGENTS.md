@@ -25,6 +25,10 @@ application repositories. Production dependencies must remain limited to the BOM
 
 Java 21 and the committed Gradle wrapper are required. On Windows, use `gradlew.bat`.
 
+Run `./gradlew checkBinaryCompatibility` to compare the built JAR with the latest stable Maven
+Central release in the same major at or below `projectVersion` (ignoring `-SNAPSHOT`). The
+`check` task includes this comparison on pull requests and pushes to master and release branches.
+
 ## Coding Style & Naming Conventions
 
 Spotless applies Palantir Java Format and ktfmt; do not hand-align code against those formatters.
