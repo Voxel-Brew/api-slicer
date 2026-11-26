@@ -67,6 +67,11 @@ History favors concise, imperative subjects, sometimes scoped with prefixes such
 explain the contract impact, identify linked issues, note compatibility or migration concerns, and
 list verification commands. Include screenshots only for documentation rendering changes.
 
+When a pull request resolves a known GitHub issue, add `Closes #123` to the PR description,
+using the actual issue number. For an issue in another repository, use
+`Closes owner/repository#123`. Add the closing reference to the PR targeting
+`master` so GitHub closes the issue when the PR is merged.
+
 ## Security & Publication
 
 Never commit credentials, signing keys, generated artifacts, or local Gradle properties. Remote
