@@ -67,6 +67,9 @@ History favors concise, imperative subjects, sometimes scoped with prefixes such
 explain the contract impact, identify linked issues, note compatibility or migration concerns, and
 list verification commands. Include screenshots only for documentation rendering changes.
 
+When a commit addresses a known GitHub issue, include the issue number in the
+commit subject as the scope, for example `feat(#1337): foo boo bar baz`.
+
 When a pull request resolves a known GitHub issue, add `Closes #123` to the PR description,
 using the actual issue number. For an issue in another repository, use
 `Closes owner/repository#123`. Add the closing reference to the PR targeting
